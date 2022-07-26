@@ -5,6 +5,7 @@ on: push
 jobs:
   first-job:
     name: 'First Job'
+    if: github.event_name == 'pull_request'
 
     strategy:
       matrix:
