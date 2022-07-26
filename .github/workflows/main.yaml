@@ -15,6 +15,7 @@ jobs:
     - name: 'Set environment variable 1'
       shell: bash
       run: |
+        echo $GITHUB_ENV
         echo "STEP_1='This value comes from the step 1'" >> $GITHUB_ENV
 
     - name: 'Set environment variable 2'
