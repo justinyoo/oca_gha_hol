@@ -16,8 +16,6 @@ jobs:
 
   deploy-to-dev-job:
     name: 'Deployment Job to DEV'
-    needs:
-    - build-job
 
     runs-on: ubuntu-latest
 
@@ -30,6 +28,7 @@ jobs:
   deploy-to-prod-job:
     name: 'Deployment Job to PROD'
     needs:
+    - build-job
     - deploy-to-dev-job
 
     runs-on: ubuntu-latest
