@@ -6,35 +6,14 @@ jobs:
   first-job:
     name: 'First Job'
 
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ 'ubuntu-latest', 'windows-latest', 'macos-latest' ]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
-    - name: 'Set output value 1'
-      id: step1
+    - name: 'Say Hello on ${{ matrix.os }}'
       shell: bash
       run: |
-        STEP_1='This value comes from the step 1'
-
-        echo "::add-mask::$STEP_1"
-        echo "::set-output name=value1::$STEP_1"
-
-    - name: 'Set output value 2'
-      id: step2
-      shell: pwsh
-      run: |
-        $STEP_2='This value comes from the step 2'
-
-        echo "::set-output name=value2::$STEP_2"
-
-    - name: 'Get output values'
-      shell: pwsh
-      run: |
-        echo "STEP 1: ${{ steps.step1.outputs.value1 }}"
-        echo "STEP 2: ${{ steps.step2.outputs.value2 }}"
-        echo "SECRET 1: ${{ secrets.SECRET_1 }}"
-
-        if ("${{ secrets.SECRET_1 }}" -eq "Hello World") {
-          echo "TRUE"
-        } else {
-          echo "FALSE"
-        }
+        echo "Hello from ${{ matrix.os }}"
